@@ -1,0 +1,17 @@
+{
+  "name": "openam-agent-demo",
+  "version": "1.0.0",
+  "description": "Demo app for openam-agent",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.3",
+    "openam-agent": "^0.2.1",
+    "passport": "^0.3.0",
+    "swig": "^1.4.2"
+  }
+}

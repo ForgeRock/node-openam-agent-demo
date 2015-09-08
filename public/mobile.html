@@ -1,0 +1,74 @@
+{% extends 'layout.html' %}
+
+{% block title %}Mobile{% endblock %}
+
+{% block header %}
+    <i class="glyphicon glyphicon-phone"></i> Try the mobile API
+{% endblock %}
+
+{% block lead %}
+    This page is for testing the <code>/api/mobile</code> endpoint.
+{% endblock %}
+
+{% block content %}
+
+    <script>
+        function send() {
+            var accessToken = document.getElementById('access_token').value;
+            var xhr = new XMLHttpRequest();
+
+            xhr.onload = function () {
+                var responseE = document.getElementById('response');
+                document.getElementById('response-container').style.display = 'block';
+
+                if (xhr.status === 200) {
+                    responseE.innerHTML = JSON.stringify(JSON.parse(xhr.responseText), null, 2);
+                } else {
+                    responseE.innerHTML = xhr.status + ' ' + xhr.statusText;
+                }
+            };
+
+            xhr.open('GET', '/api/mobile');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+            xhr.send();
+        }
+
+        function refresh(tokenId) {
+            document.getElementById('token-id').innerText = tokenId;
+        }
+    </script>
+    <div class="row">
+        <div class="col-md-12">
+            <p>The <code>/api/mobile</code> path is protected by the <strong>OAuth2Shield</strong>. You will need an
+                OAuth2 access_token from OpenAM (<a
+                        href="https://backstage.forgerock.com/#!/docs/openam/current/dev-guide/chap-rest-oauth2-oidc#rest-api-oauth2-client-endpoints"
+                        target="_blank">here's how</a>) and send it in a header. Test it here!
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-inline">
+                <div class="form-group">
+                    <label for="access_token">OAuth2 access_token</label>
+                    <input type="text" class="form-control" id="access_token" onkeyup="refresh(this.value)"/>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="send()">Send</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Example</h3>
+
+            <p>To reproduce this on the command line, use the following command:</p>
+            <pre>curl --header 'Authorization: Bearer <span id="token-id"></span>' <script>document.write(window.location.origin)</script>/api/mobile</pre>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" id="response-container" style="display: none">
+            <h3>Response:</h3>
+            <pre id="response"></pre>
+        </div>
+    </div>
+{% endblock %}

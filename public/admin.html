@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block title %}Admin{% endblock %}
+
+{% block header %}
+    <i class="glyphicon glyphicon-tower"></i> Hello, {{ session.data.uid }}!
+{% endblock %}
+
+{% block lead %}
+    This page is for <strong>admins</strong> only
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <p class="lead">
+                This is page is protected by the <strong>CookieShield</strong> and the <strong>PolicyShield</strong>.
+                The policy protecting this path only allows members of the admin group to see it.
+            </p>
+
+            <p>Here's everything the agent knows about you:</p>
+            <pre>{{ JSON.stringify(session, null, 2) }}</pre>
+        </div>
+    </div>
+{% endblock %}

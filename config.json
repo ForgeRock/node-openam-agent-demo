@@ -1,0 +1,10 @@
+{
+  "serverUrl": "http://openam.example.com:8080/openam",
+  "appUrl": "http://app.example.com:8080",
+  "notificationRoute": "/",
+  "notificationsEnabled": true,
+  "username": "demo-agent",
+  "password": "changeit",
+  "realm": "/",
+  "appName": "demo-app"
+}

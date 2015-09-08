@@ -1,0 +1,85 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <p class="lead">This route doesn't use any protection, it is public.</p>
+
+            <p>Check out the links below for various other kinds of stuff.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="thumbnail-icon">
+                <i class="glyphicon glyphicon-home"></i>
+            </div>
+            <div class="caption">
+                <h3>Unprotected Home Page</h3>
+
+                <p>This route doesn't use any protection, it is public.</p>
+
+                <p><a href="/" class="btn btn-primary" role="button">Go</a></p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="thumbnail-icon">
+                <i class="glyphicon glyphicon-user"></i>
+            </div>
+            <div class="caption">
+                <h3>Members Area</h3>
+
+                <p>This is page is protected by the <strong>CookieShield</strong>. You need to have a valid session to
+                    see this.</p>
+
+                <p><a href="/members" class="btn btn-primary" role="button">Go</a></p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="thumbnail-icon">
+                <i class="glyphicon glyphicon-tower"></i>
+            </div>
+            <div class="caption">
+                <h3>Admin</h3>
+
+                <p>This is page is protected by the <strong>CookieShield</strong> and <strong>PolicyShield</strong>.
+                    The policy protecting this path only allows members of the admin group to see it.</p>
+
+                <p><a href="/admin" class="btn btn-primary" role="button">Go</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="thumbnail-icon">
+                <i class="glyphicon glyphicon-phone"></i>
+            </div>
+            <div class="caption">
+                <h3>Mobile</h3>
+
+                <p>
+                    The <code>/api/mobile</code> path is protected by the <strong>OAuth2Shield</strong>. You will need an
+                    OAuth2 access_token from OpenAM and send it in a header. Test it here!
+                </p>
+
+                <p><a href="/mobile" class="btn btn-primary" role="button">Go</a></p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="thumbnail-icon">
+                <i class="glyphicon glyphicon-console"></i>
+            </div>
+            <div class="caption">
+                <h3>Basic Auth</h3>
+
+                <p>
+                    This is page is protected by the <strong>BasicAuthShield</strong>. You won't get a session and your
+                    credentials will be validated every time.
+                </p>
+
+                <p><a href="/basic" class="btn btn-primary" role="button">Go</a></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

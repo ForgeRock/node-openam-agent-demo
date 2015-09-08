@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} Layout {% endblock %} - OpenAM Agent Demo App</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <style>
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+
+        body {
+            padding-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 50px;
+            border-top: 1px solid #ddd;
+            padding: 15px;
+        }
+
+        .thumbnail-icon {
+            font-size: 8em;
+            line-height: 0;
+            margin: 10px 0 0 10px;
+            color: #aaa;
+        }
+
+        §    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <a href="/" class="navbar-brand">openam-agent-demo</a>
+        <ul class="nav navbar-nav">
+            <li class="{% if page == 'members' %}active{% endif %}"><a href="/members">members</a></li>
+            <li class="{% if page == 'admin' %}active{% endif %}"><a href="/admin">admin</a></li>
+            <li class="{% if page == 'mobile' %}active{% endif %}"><a href="/mobile">mobile</a></li>
+            <li class="{% if page == 'basic' %}active{% endif %}"><a href="/basic">basic auth</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="jumbotron">
+    <div class="container">
+        <h1>{% block header %}OpenAM Agent Demo App{% endblock %}</h1>
+
+        <p>{% block lead %} For testing {{ pkg.name }} {% endblock %}</p>
+    </div>
+</div>
+<div class="container">
+    {% block content %}
+        {#    content goes here#}
+    {% endblock %}
+</div>
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">
+            Powered by <a href="{{ pkg.homepage }}" target="_blank">{{ pkg.name }} v{{ pkg.version }}</a>
+        </p>
+    </div>
+</footer>
+</body>
+</html>
