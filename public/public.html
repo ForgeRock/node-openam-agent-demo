@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block title %}Members Area{% endblock %}
+
+{% block header %}
+    <i class="glyphicon glyphicon-user"></i> Hello!
+{% endblock %}
+
+{% block lead %} This is a public page {% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <p class="lead">
+                This is page is not protected at all. Anyone can see it. The server doesn't care who you are.
+            </p>
+        </div>
+    </div>
+{% endblock %}

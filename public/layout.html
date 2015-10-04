@@ -39,6 +39,8 @@
     <div class="container">
         <a href="/" class="navbar-brand">openam-agent-demo</a>
         <ul class="nav navbar-nav">
+            <li class="{% if page == 'public' %}active{% endif %}"><a href="/public">public</a></li>
+            <li class="{% if page == 'passthrough' %}active{% endif %}"><a href="/passthrough">passthrough</a></li>
             <li class="{% if page == 'members' %}active{% endif %}"><a href="/members">members</a></li>
             <li class="{% if page == 'admin' %}active{% endif %}"><a href="/admin">admin</a></li>
             <li class="{% if page == 'mobile' %}active{% endif %}"><a href="/mobile">mobile</a></li>

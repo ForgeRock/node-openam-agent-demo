@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block title %}Members Area{% endblock %}
+
+{% block header %}
+    <i class="glyphicon glyphicon-user"></i> Hello, {{ session.data.uid || 'anonymous' }}!
+{% endblock %}
+
+{% block lead %} This is a public page with identity information {% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <p class="lead">
+                This is page is not protected at all. Anyone can see it.
+            </p>
+            <p>Here's everything the agent knows about you:</p>
+            <pre>{{ JSON.stringify(session, null, 2) }}</pre>
+        </div>
+    </div>
+{% endblock %}

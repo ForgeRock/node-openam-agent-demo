@@ -8,6 +8,7 @@ var pkg = require('./node_modules/openam-agent/package.json'),
     agent = new openamAgent.PolicyAgent(config);
 
 var cookieShield = new openamAgent.CookieShield({getProfiles: true}),
+    passThroughShield = new openamAgent.CookieShield({getProfiles: true, passThrough: true}),
     policyShield = new openamAgent.PolicyShield(config.appName),
     oauth2Shield = new openamAgent.OAuth2Shield(),
     basicAuthShield = new openamAgent.BasicAuthShield();
@@ -20,20 +21,22 @@ app.get('/', function (req, res) {
 
 });
 
-app.use('/members', agent.shield(cookieShield), function (req, res) {
-    res.send(swig.compileFile(__dirname + '/public/members.html')({
+app.get('/public', function (req, res) {
+    res.send(swig.compileFile(__dirname + '/public/public.html')({
         pkg: pkg,
         session: req.session,
-        page: 'members'
+        page: 'public'
     }));
+
 });
 
-app.get('/admin', agent.shield(cookieShield), agent.shield(policyShield), function (req, res) {
-    res.send(swig.compileFile(__dirname + '/public/admin.html')({
+app.get('/passthrough', agent.shield(passThroughShield), function (req, res) {
+    res.send(swig.compileFile(__dirname + '/public/passthrough.html')({
         pkg: pkg,
         session: req.session,
-        page: 'admin'
+        page: 'passthrough'
     }));
+
 });
 
 app.get('/mobile', function (req, res) {
@@ -59,7 +62,32 @@ app.get('/api/mobile', agent.shield(oauth2Shield), function (req, res) {
     });
 });
 
-// notifications
+
+// you can use a shield for an entire router, but make sure to mount the router after other routes, otherwise the
+// shield middleware will be used for everything else mounted under the same path as the router.
+
+var router = express.Router();
+router.use(agent.shield(cookieShield));
+
+router.use('/members', function (req, res) {
+    res.send(swig.compileFile(__dirname + '/public/members.html')({
+        pkg: pkg,
+        session: req.session,
+        page: 'members'
+    }));
+});
+
+router.get('/admin', agent.shield(policyShield), function (req, res) {
+    res.send(swig.compileFile(__dirname + '/public/admin.html')({
+        pkg: pkg,
+        session: req.session,
+        page: 'admin'
+    }));
+});
+
+app.use('/', router);
+
+// mount the notifications middleware
 app.use(agent.notifications.router);
 
 agent.notifications.on('session', function (session) {
