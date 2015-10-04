@@ -1,6 +1,5 @@
 var express = require('express'),
     swig = require('swig'),
-    bodyParser = require('body-parser'),
     openamAgent= require('openam-agent'),
     config = require('./config.json');
 
@@ -8,7 +7,7 @@ var pkg = require('./node_modules/openam-agent/package.json'),
     app = express(),
     agent = new openamAgent.PolicyAgent(config);
 
-var cookieShield = new openamAgent.CookieShield(),
+var cookieShield = new openamAgent.CookieShield({getProfiles: true}),
     policyShield = new openamAgent.PolicyShield(config.appName),
     oauth2Shield = new openamAgent.OAuth2Shield(),
     basicAuthShield = new openamAgent.BasicAuthShield();

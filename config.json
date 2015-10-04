@@ -6,5 +6,6 @@
   "username": "demo-agent",
   "password": "changeit",
   "realm": "/",
-  "appName": "demo-app"
+  "appName": "demo-app",
+  "logLevel": "info"
 }
