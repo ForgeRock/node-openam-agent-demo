@@ -6,7 +6,11 @@
   "scripts": {
     "start": "node ."
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zoltantarcsay/node-openam-agent-demo"
+  },
+  "author": "Zoltan Tarcsay <zoltan.tarcsay@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "express": "^4.13.3",

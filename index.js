@@ -1,7 +1,37 @@
 var express = require('express'),
     swig = require('swig'),
-    openamAgent= require('openam-agent'),
+    openamAgent = require('openam-agent'),
     config = require('./config.json');
+
+
+config.cache = new openamAgent.SimpleCache({
+    expiresAfterSeconds: 60
+});
+
+/*
+
+Other caches:
+
+config.cache = new openamAgent.MongoCache({
+    url: 'mongodb://localhost/agent',
+    expiresAfterSeconds: 60,
+    collectionName: 'agenttestcache1'
+});
+
+config.cache = new openamAgent.MemcachedCache({
+    url: 'u14:11211',
+    expiresAfterSeconds: 60
+});
+
+config.cache = new openamAgent.CouchDBCache({
+    host: 'zpro.example.com',
+    port: 5984,
+    auth: {
+        username: 'admin',
+        password: 'cangetin'
+    }
+});
+*/
 
 var pkg = require('./node_modules/openam-agent/package.json'),
     app = express(),
@@ -97,4 +127,5 @@ agent.notifications.on('session', function (session) {
 var server = app.listen(8080, function () {
     console.log('Server started on port %d', server.address().port);
 });
+
 
