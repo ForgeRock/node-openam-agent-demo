@@ -4,40 +4,36 @@ var express = require('express'),
     config = require('./config.json');
 
 
-config.cache = new openamAgent.SimpleCache({
+config.sessionCache = new openamAgent.SimpleCache({
     expiresAfterSeconds: 60
 });
 
-/*
 
- Other caches:
+//config.sessionCache = new openamAgent.MongoCache({
+//    url: 'mongodb://localhost/agent',
+//    expiresAfterSeconds: 60,
+//    collectionName: 'agenttestcache1'
+//});
 
- config.cache = new openamAgent.MongoCache({
- url: 'mongodb://localhost/agent',
- expiresAfterSeconds: 60,
- collectionName: 'agenttestcache1'
- });
+//config.sessionCache = new openamAgent.MemcachedCache({
+//    url: 'u14:11211',
+//    expiresAfterSeconds: 60
+//});
 
- config.cache = new openamAgent.MemcachedCache({
- url: 'u14:11211',
- expiresAfterSeconds: 60
- });
-
- config.cache = new openamAgent.CouchDBCache({
- host: 'zpro.example.com',
- port: 5984,
- auth: {
- username: 'admin',
- password: 'cangetin'
- }
- });
- */
+//config.sessionCache = new openamAgent.CouchDBCache({
+//    host: 'zpro.example.com',
+//    port: 5984,
+//    auth: {
+//        username: 'admin',
+//        password: 'cangetin'
+//    }
+//});
 
 var pkg = require('./node_modules/openam-agent/package.json'),
     app = express(),
     agent = new openamAgent.PolicyAgent(config);
 
-var cookieShield = new openamAgent.CookieShield({getProfiles: true, cdsso: true}),
+var cookieShield = new openamAgent.CookieShield({getProfiles: true, cdsso: true, noRedirect: true}),
     passThroughShield = new openamAgent.CookieShield({getProfiles: true, passThrough: true}),
     policyShield = new openamAgent.PolicyShield(config.appName),
     oauth2Shield = new openamAgent.OAuth2Shield(),
@@ -124,7 +120,7 @@ agent.notifications.on('session', function (session) {
     console.log('A user\'s session has changed!', session);
 });
 
-var server = app.listen(8080, function () {
+var server = app.listen(8090, function () {
     console.log('Server started on port %d', server.address().port);
 });
 
