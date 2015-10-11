@@ -10,45 +10,47 @@ config.cache = new openamAgent.SimpleCache({
 
 /*
 
-Other caches:
+ Other caches:
 
-config.cache = new openamAgent.MongoCache({
-    url: 'mongodb://localhost/agent',
-    expiresAfterSeconds: 60,
-    collectionName: 'agenttestcache1'
-});
+ config.cache = new openamAgent.MongoCache({
+ url: 'mongodb://localhost/agent',
+ expiresAfterSeconds: 60,
+ collectionName: 'agenttestcache1'
+ });
 
-config.cache = new openamAgent.MemcachedCache({
-    url: 'u14:11211',
-    expiresAfterSeconds: 60
-});
+ config.cache = new openamAgent.MemcachedCache({
+ url: 'u14:11211',
+ expiresAfterSeconds: 60
+ });
 
-config.cache = new openamAgent.CouchDBCache({
-    host: 'zpro.example.com',
-    port: 5984,
-    auth: {
-        username: 'admin',
-        password: 'cangetin'
-    }
-});
-*/
+ config.cache = new openamAgent.CouchDBCache({
+ host: 'zpro.example.com',
+ port: 5984,
+ auth: {
+ username: 'admin',
+ password: 'cangetin'
+ }
+ });
+ */
 
 var pkg = require('./node_modules/openam-agent/package.json'),
     app = express(),
     agent = new openamAgent.PolicyAgent(config);
 
-var cookieShield = new openamAgent.CookieShield({getProfiles: true}),
+var cookieShield = new openamAgent.CookieShield({getProfiles: true, cdsso: true}),
     passThroughShield = new openamAgent.CookieShield({getProfiles: true, passThrough: true}),
     policyShield = new openamAgent.PolicyShield(config.appName),
     oauth2Shield = new openamAgent.OAuth2Shield(),
     basicAuthShield = new openamAgent.BasicAuthShield();
+
+
+app.use(agent.cdsso());
 
 // app routes
 app.get('/', function (req, res) {
     res.send(swig.compileFile(__dirname + '/public/index.html')({
         pkg: pkg
     }));
-
 });
 
 app.get('/public', function (req, res) {
@@ -57,7 +59,6 @@ app.get('/public', function (req, res) {
         session: req.session,
         page: 'public'
     }));
-
 });
 
 app.get('/passthrough', agent.shield(passThroughShield), function (req, res) {
@@ -66,7 +67,6 @@ app.get('/passthrough', agent.shield(passThroughShield), function (req, res) {
         session: req.session,
         page: 'passthrough'
     }));
-
 });
 
 app.get('/mobile', function (req, res) {
