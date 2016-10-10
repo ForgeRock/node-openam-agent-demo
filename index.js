@@ -33,14 +33,13 @@ var pkg = require('./node_modules/openam-agent/package.json'),
     app = express(),
     agent = new openamAgent.PolicyAgent(config);
 
-var cookieShield = new openamAgent.CookieShield({getProfiles: true, cdsso: true, noRedirect: true}),
+var cookieShield = new openamAgent.CookieShield({getProfiles: true, cdsso: false, noRedirect: false}),
     passThroughShield = new openamAgent.CookieShield({getProfiles: true, passThrough: true}),
     policyShield = new openamAgent.PolicyShield(config.appName),
     oauth2Shield = new openamAgent.OAuth2Shield(),
     basicAuthShield = new openamAgent.BasicAuthShield();
 
-
-app.use(agent.cdsso());
+//app.use(agent.cdsso());
 
 // app routes
 app.get('/', function (req, res) {
@@ -114,14 +113,12 @@ router.get('/admin', agent.shield(policyShield), function (req, res) {
 app.use('/', router);
 
 // mount the notifications middleware
-app.use(agent.notifications.router);
+app.use(agent.notifications());
 
-agent.notifications.on('session', function (session) {
+agent.on('session', function (session) {
     console.log('A user\'s session has changed!', session);
 });
 
-var server = app.listen(8090, function () {
+var server = app.listen(8080, function () {
     console.log('Server started on port %d', server.address().port);
 });
-
-

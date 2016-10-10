@@ -14,7 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.13.3",
-    "openam-agent": "^0.2.1",
+    "openam-agent": "^1.0.0",
     "passport": "^0.3.0",
     "swig": "^1.4.2"
   }
