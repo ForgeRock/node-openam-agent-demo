@@ -1,33 +1,43 @@
 var express = require('express'),
     swig = require('swig'),
     openamAgent = require('openam-agent'),
+    SimpleCache = require('openam-agent-cache-simple').SimpleCache,
+    MemcachedCache = require('openam-agent-cache-memcached').MemcachedCache,
+    CouchDBCache = require('openam-agent-cache-couchdb').CouchDBCache,
+    RedisCache = require('openam-agent-cache-redis').RedisCache,
+    MongoCache = require('openam-agent-cache-mongodb').MongoCache,
     config = require('./config.json');
 
 
-config.sessionCache = new openamAgent.SimpleCache({
+config.sessionCache = new SimpleCache({
     expiresAfterSeconds: 60
 });
 
 
-//config.sessionCache = new openamAgent.MongoCache({
+// config.sessionCache = new MongoCache({
 //    url: 'mongodb://localhost/agent',
 //    expiresAfterSeconds: 60,
 //    collectionName: 'agenttestcache1'
-//});
-
-//config.sessionCache = new openamAgent.MemcachedCache({
-//    url: 'u14:11211',
+// });
+//
+// config.sessionCache = new MemcachedCache({
+//    url: 'localhost:11211',
 //    expiresAfterSeconds: 60
-//});
-
-//config.sessionCache = new openamAgent.CouchDBCache({
-//    host: 'zpro.example.com',
+// });
+//
+// config.sessionCache = new RedisCache({
+//    url: 'localhost:27017',
+//    expiresAfterSeconds: 60
+// });
+//
+// config.sessionCache = new CouchDBCache({
+//    host: 'localhost',
 //    port: 5984,
 //    auth: {
 //        username: 'admin',
 //        password: 'cangetin'
 //    }
-//});
+// });
 
 var pkg = require('./node_modules/openam-agent/package.json'),
     app = express(),
