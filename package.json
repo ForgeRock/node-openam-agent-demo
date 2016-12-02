@@ -14,7 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.13.3",
-    "openam-agent": "^2.0.0",
+    "openam-agent": "^3.0.0",
     "openam-agent-cache-couchdb": "^1.0.0",
     "openam-agent-cache-memcached": "^1.0.1",
     "openam-agent-cache-mongodb": "^1.0.2",

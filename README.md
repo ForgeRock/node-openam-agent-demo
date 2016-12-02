@@ -23,6 +23,12 @@ $ npm install
 ...
 ```
 
+Examples
+--------
+- Example 1: Simple app with a vanilla Node.js HttpServer
+- Example 2: Rich HTML website using [Express](http://expressjs.com/)
+
+
 Configuration
 -------------
 Before running the app, update `config.json` with the correct settings in your environment.
@@ -47,30 +53,11 @@ Start the app from the command line:
 
 ```bash
 $ npm start # the same as: node index.js
-2015-10-04T09:54:30.014Z - info: [EyUuLkq1l] Agent initialized.
-Server started on port 8080
+2016-12-02T14:14:50.486Z - info: [rkMyfbJXl] Agent initialized.
+2016-12-02T14:14:50.507Z - info: [HygMkG-JXg] Agent initialized.
+Example 1 started on port 8080
 ```
 
-The Application
----------------
-This demo is an [Express](http://expressjs.com/) application whose paths are protected in various ways with a PolicyAgent. Most paths return HTML.
-
-### Paths
-
-#### /
-The root path of the application returns an unprotected landing page.
-
-#### /members
-Another HTML resource, protected by the CookiShield (it only requires a valid OpenAM session, but doesn't enfoce any policies -- the equivalent of "SSO only mode"). The agent fetches the user's profile from OpenAM and puts it in the request object.
-
-#### /admin
-An HTML page that is protected by both the CookiShield and the PolicyShield. It can only be accessed if allowed by policies.
-
-#### /mobile
-An unprotected HTML page that lets you test the `/api/mobile` resource from your browser.
-
-#### /api/mobile
-A JSON resource that is protected by the OAuth2Shield and can only be accessed with a valid access_token. The agent gets the tokeninfo resource from OpenAM and puts it in the request object. Further validation can be done with a custom middleware, e.g. by comparing the list of scopes in the tokeninfo to resource path.
-
-#### /basic
-A plain text resource protected by the BasicAuthShield. The username and password must be sent for each request and they will be validated by the agent without creating new user sessions in OpenAM. This feature can be useful for clients that don't support cookies or OAuth2.
+`npm start` starts example1 by default. To run example2, update `index.js` 
+or run `node lib/example2`
+  
