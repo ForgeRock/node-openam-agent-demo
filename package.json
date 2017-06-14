@@ -6,6 +6,9 @@
   "scripts": {
     "start": "node ."
   },
+  "engines": {
+    "node": ">=6.9.5"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/zoltantarcsay/node-openam-agent-demo"
@@ -14,7 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.13.3",
-    "openam-agent": "^3.0.0",
+    "openam-agent": "^3.1.2",
     "openam-agent-cache-couchdb": "^1.0.0",
     "openam-agent-cache-memcached": "^1.0.1",
     "openam-agent-cache-mongodb": "^1.0.2",

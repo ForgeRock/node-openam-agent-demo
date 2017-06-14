@@ -33,7 +33,7 @@ Configuration
 -------------
 Before running the app, update `config.json` with the correct settings in your environment.
 
-```javascript
+```json
 {
   "serverUrl": "http://openam.example.com:8080/openam", // the base URL of your OpenAM deployment
   "appUrl": "http://app.example.com:8080",              // the base URL of the demo app (needed for notifications)
@@ -58,6 +58,5 @@ $ npm start # the same as: node index.js
 Example 1 started on port 8080
 ```
 
-`npm start` starts example1 by default. To run example2, update `index.js` 
-or run `node lib/example2`
+`npm start` runs example1 by default. To run example2 (etc.), run `npm start -- example2` or `node lib/example2`
   
