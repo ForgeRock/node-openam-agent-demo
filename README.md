@@ -1,36 +1,35 @@
-node-openam-agent-demo
-======================
+# node-openam-agent-demo
 
-This is a demo applicaion that showcases the [node-openam-agent](https://github.com/zoltantarcsay/node-openam-agent) package.
+This is a demo applicaion that showcases the [node-openam-agent](https://github.com/ForgeRock/node-openam-agent) package.
 
-Prerequisites
--------------
+## Prerequisites
+
 This demo requires a running instance of OpenAM 12.0.0 with the following bits of configuration:
 * A realm with users
 * A policy agent profile (an agent profile of type "2.2 Agent" will suffice since the configuration is stored locally)
 * An entitlement application with a policy for the "/admin" resource
 * A configured OAuth2 server in a realm with an OAuth 2.0 agent profile
 
-Installation
-------------
+## Installation
+
 Clone with git and install the local npm packages:
 
 ```bash
-$ git clone git@github.com:zoltantarcsay/node-openam-agent-demo.git
+$ git clone git@github.com:ForgeRock/node-openam-agent-demo.git
 ...
 $ cd node-openam-agent-demo
 $ npm install
 ...
 ```
 
-Examples
---------
+## Examples
+
 - Example 1: Simple app with a vanilla Node.js HttpServer
 - Example 2: Rich HTML website using [Express](http://expressjs.com/)
 
 
-Configuration
--------------
+## Configuration
+
 Before running the app, update `config.json` with the correct settings in your environment.
 
 ```json
@@ -47,8 +46,8 @@ Before running the app, update `config.json` with the correct settings in your e
 }
 ```
 
-Starting the app
-----------------
+## Starting the app
+
 Start the app from the command line:
 
 ```bash
@@ -59,4 +58,12 @@ Example 1 started on port 8080
 ```
 
 `npm start` runs example1 by default. To run example2 (etc.), run `npm start -- example2` or `node lib/example2`
+
+## DISCLAIMER
+
+The sample code described herein is provided on an "as is" basis, without warranty of any kind, to the fullest extent permitted by law. ForgeRock does not warrant or guarantee the individual success developers may have in implementing the sample code on their development platforms or in production configurations.
+
+ForgeRock does not warrant, guarantee or make any representations regarding the use, results of use, accuracy, timeliness or completeness of any data or information relating to the sample code. ForgeRock disclaims all warranties, expressed or implied, and in particular, disclaims all warranties of merchantability, and warranties related to the code, or any service or software related thereto.
+
+ForgeRock shall not be liable for any direct, indirect or consequential damages or costs of any type arising out of any action taken by you or others related to the sample code.
   
