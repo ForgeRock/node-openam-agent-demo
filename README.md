@@ -32,7 +32,7 @@ $ npm install
 
 Before running the app, update `config.json` with the correct settings in your environment.
 
-```json
+```javascript
 {
   "serverUrl": "http://openam.example.com:8080/openam", // the base URL of your OpenAM deployment
   "appUrl": "http://app.example.com:8080",              // the base URL of the demo app (needed for notifications)
