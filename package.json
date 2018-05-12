@@ -16,13 +16,13 @@
   "author": "Zoltan Tarcsay <zoltan.tarcsay@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "@forgerock/openam-agent": "^4.0.1",
+    "@forgerock/openam-agent-cache-couchdb": "^2.0.1",
+    "@forgerock/openam-agent-cache-memcached": "^2.0.0",
+    "@forgerock/openam-agent-cache-mongodb": "^2.0.0",
+    "@forgerock/openam-agent-cache-redis": "^2.0.0",
+    "@forgerock/openam-agent-cache-simple": "^2.0.0",
     "express": "^4.13.3",
-    "openam-agent": "^3.1.2",
-    "openam-agent-cache-couchdb": "^1.0.0",
-    "openam-agent-cache-memcached": "^1.0.1",
-    "openam-agent-cache-mongodb": "^1.0.2",
-    "openam-agent-cache-redis": "^1.0.1",
-    "openam-agent-cache-simple": "^1.0.1",
     "passport": "^0.3.0",
     "swig": "^1.4.2"
   }
